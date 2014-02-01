@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MarvelMatch</title>
+    <link rel="stylesheet" href="marvelmatch.css">
+  </head>
+  <body>
+    <h1>MarvelMatch</h1>
+
+    <div id="signin" style="display: none;"><div id="signinbtn" class="signin"><span class="icon"></span><span class="label">Sign in with Google</span></div><br><br></div>
+
+    <div id="progress"></div>
+
+    <template id="character" bind>
+      You are {{ name }}!<br><br>
+      <a href="{{ url }}" target="_blank"><img src="{{ pic }}"></a><br><br>
+      <div style="max-width: 640px">{{ description }}</div><br><br>
+    </template>
+
+    <template id="characters" bind>
+      <template repeat="{{ char in characters }}">
+        <template if="{{ !char.hidden }}">
+          <a href="{{ char.url }}" target="_blank"><img src="{{ char.thumb }}"></a>
+        </template>
+      </template>
+    </template>
+
+    <script type="application/dart" src="marvelmatch.dart"></script>
+    <script src="packages/browser/dart.js"></script>
+  </body>
+</html>

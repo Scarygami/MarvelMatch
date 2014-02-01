@@ -1,0 +1,8 @@
+name: MarvelMatch
+description: Which Marvel Character are you really
+dependencies:
+  google_plus_v1_api: any
+  polymer: any
+transformers:
+- polymer:
+    entry_points: web/marvelmatch.html
