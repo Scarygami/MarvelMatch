@@ -20,11 +20,24 @@
     </template>
 
     <template id="characters" bind>
-      <template repeat="{{ char in characters }}">
-        <template if="{{ !char.hidden }}">
-          <a href="{{ char.url }}" target="_blank"><img src="{{ char.thumb }}"></a>
+      <p style="text-align: right;">Debug information <input type="checkbox" checked="{{ debug }}"></p> 
+      <div class="chars">
+        <template repeat="{{ char in characters }}">
+          <template if="{{ !char.hidden }}">
+            <div class="char">
+              <a href="{{ char.url }}" target="_blank"><img src="{{ char.thumb }}"></a><br>
+              <template if="{{ debug }}">
+                <b>{{ char.name }}</b><br>
+                {{ char.description }}<br><br>
+                {{ char.rating }} / {{ char.wordcount }}<br>
+                <template repeat="{{ reason in char.reasons }}">
+                  {{ reason['word'] }} - {{ reason['char_value'] }} / {{ reason['profile_value'] }}<br>
+                </template>
+              </template>
+            </div>
+          </template>
         </template>
-      </template>
+      </div>
     </template>
 
     <script type="application/dart" src="marvelmatch.dart"></script>

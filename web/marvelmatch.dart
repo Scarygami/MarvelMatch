@@ -20,9 +20,10 @@ CharacterList characters = new CharacterList([]);
 oauth.GoogleOAuth2 auth;
 pluslib.Plus plus;
 
-final CLIENT_ID = "<your_google_client_id>";
-final MARVEL_DEV_KEY = "<your_marvel_dev_key>";
+final CLIENT_ID = "<your-google-api-client-id>";
+final MARVEL_DEV_KEY = "<your-marvel-devloper-key>";
 final SCOPES = [pluslib.Plus.PLUS_LOGIN_SCOPE];
+final DB_VERSION = "1.2";
 
 Future<bool> fetchChars({offset: 0}) {
   var path = "https://gateway.marvel.com/v1/public/characters?limit=100&offset=${offset}&apikey=$MARVEL_DEV_KEY";
@@ -34,13 +35,9 @@ Future<bool> fetchChars({offset: 0}) {
       if (data.containsKey("data") && data["data"].containsKey("results") && data["data"]["results"].length > 0) {
         for (var chardata in data["data"]["results"]) {
           if (chardata.containsKey("description")) {
-            if (chardata["description"] != "") {
-              if (chardata.containsKey("thumbnail") && chardata["thumbnail"].containsKey("path")) {
-                if (chardata.containsKey("urls") && chardata["urls"].length > 0) {
-                  var thumb = chardata["thumbnail"]["path"] + "/portrait_small" + "." + chardata["thumbnail"]["extension"];
-                  var pic = chardata["thumbnail"]["path"] + "/portrait_xlarge" + "." + chardata["thumbnail"]["extension"];
-                  characters.add(new Character(chardata["name"], thumb, pic, chardata["description"], chardata["urls"][0]["url"]));
-                }
+            if (chardata.containsKey("thumbnail") && chardata["thumbnail"].containsKey("path")) {
+              if (chardata.containsKey("urls") && chardata["urls"].length > 0) {
+                characters.add(new Character.fromMarvel(chardata));
               }
             }
           }
@@ -49,6 +46,8 @@ Future<bool> fetchChars({offset: 0}) {
         if (data["data"]["offset"] + 100 < data["data"]["total"]) {
           fetchChars(offset: offset + 100).then((v) => completer.complete(v));
         } else {
+          window.localStorage["version"] = DB_VERSION;
+          window.localStorage["last_update"] = (new DateTime.now()).millisecondsSinceEpoch.toString();
           completer.complete(true);
         }
       }
@@ -82,7 +81,7 @@ void analyze(token) {
 
       progress.innerHtml = "Finding matching characters...<br><br><br>";
 
-      List wordlist = create_wordlist(text);
+      var wordlist = create_wordmap(text);
       characters.match(wordlist);
 
       templateBind(querySelector("#character"))
@@ -95,6 +94,7 @@ void analyze(token) {
 }
 
 void initialize(bool success) {
+  querySelector("#progress").innerHtml = "";
   auth = new oauth.GoogleOAuth2(CLIENT_ID, SCOPES, tokenLoaded: analyze);
   plus = new pluslib.Plus(auth);
   querySelector("#signin").style.display = "block";
@@ -110,13 +110,18 @@ void main() {
     ..bindingDelegate = new PolymerExpressions()
     ..model = characters;
 
-  if (window.localStorage.containsKey("characters")) {
+  if (window.localStorage.containsKey("characters") &&
+      window.localStorage.containsKey("version") &&
+      window.localStorage["version"] == DB_VERSION &&
+      window.localStorage.containsKey("last_update") &&
+      (new DateTime.now()).millisecondsSinceEpoch - int.parse(window.localStorage["last_update"]) < 86400000) {
     List chars = JSON.decode(window.localStorage["characters"]);
     for (var chardata in chars) {
-      characters.add(new Character(chardata["name"], chardata["thumb"], chardata["pic"], chardata["description"], chardata["url"]));
+      characters.add(new Character.fromJson(chardata));
     }
     initialize(true);
   } else {
+    querySelector("#progress").innerHtml = "Fetching characters from Marvel...<br><br><br>";
     fetchChars().then(initialize);
   }
 }

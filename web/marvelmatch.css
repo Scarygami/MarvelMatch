@@ -52,3 +52,10 @@ h1, p {
   font-weight: bold;
 }
 
+.char {
+  display: inline-block;
+  display: inline-block;
+  max-width: 300px;
+  text-align: center;
+  vertical-align: top;
+}

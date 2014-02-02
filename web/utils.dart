@@ -1,203 +1,23 @@
 library utils;
 
 final List stop_words = [
-  "A",
-  "ABOUT",
-  "ABOVE",
-  "AFTER",
-  "AGAIN",
-  "AGAINST",
-  "ALL",
-  "AM",
-  "AN",
-  "AND",
-  "ANY",
-  "ARE",
-  "AREN'T",
-  "AS",
-  "AT",
-  "BE",
-  "BECAUSE",
-  "BEEN",
-  "BEFORE",
-  "BEING",
-  "BELOW",
-  "BETWEEN",
-  "BOTH",
-  "BUT",
-  "BY",
-  "CAN'T",
-  "CANNOT",
-  "COULD",
-  "COULDN'T",
-  "DID",
-  "DIDN'T",
-  "DO",
-  "DOES",
-  "DOESN'T",
-  "DOING",
-  "DON'T",
-  "DOWN",
-  "DURING",
-  "EACH",
-  "FEW",
-  "FOR",
-  "FROM",
-  "FURTHER",
-  "HAD",
-  "HADN'T",
-  "HAS",
-  "HASN'T",
-  "HAVE",
-  "HAVEN'T",
-  "HAVING",
-  "HE",
-  "HE'D",
-  "HE'LL",
-  "HE'S",
-  "HER",
-  "HERE",
-  "HERE'S",
-  "HERS",
-  "HERSELF",
-  "HIM",
-  "HIMSELF",
-  "HIS",
-  "HOW",
-  "HOW'S",
-  "I",
-  "I'D",
-  "I'LL",
-  "I'M",
-  "I'VE",
-  "IF",
-  "IN",
-  "INTO",
-  "IS",
-  "ISN'T",
-  "IT",
-  "IT'S",
-  "ITS",
-  "ITSELF",
-  "LET'S",
-  "ME",
-  "MORE",
-  "MOST",
-  "MUSTN'T",
-  "MY",
-  "MYSELF",
-  "NO",
-  "NOR",
-  "NOT",
-  "OF",
-  "OFF",
-  "ON",
-  "ONCE",
-  "ONLY",
-  "OR",
-  "OTHER",
-  "OUGHT",
-  "OUR",
-  "OURS ",
-  "OURSELVES",
-  "OUT",
-  "OVER",
-  "OWN",
-  "SAME",
-  "SHAN'T",
-  "SHE",
-  "SHE'D",
-  "SHE'LL",
-  "SHE'S",
-  "SHOULD",
-  "SHOULDN'T",
-  "SO",
-  "SOME",
-  "SUCH",
-  "THAN",
-  "THAT",
-  "THAT'S",
-  "THE",
-  "THEIR",
-  "THEIRS",
-  "THEM",
-  "THEMSELVES",
-  "THEN",
-  "THERE",
-  "THERE'S",
-  "THESE",
-  "THEY",
-  "THEY'D",
-  "THEY'LL",
-  "THEY'RE",
-  "THEY'VE",
-  "THIS",
-  "THOSE",
-  "THROUGH",
-  "TO",
-  "TOO",
-  "UNDER",
-  "UNTIL",
-  "UP",
-  "VERY",
-  "WAS",
-  "WASN'T",
-  "WE",
-  "WE'D",
-  "WE'LL",
-  "WE'RE",
-  "WE'VE",
-  "WERE",
-  "WEREN'T",
-  "WHAT",
-  "WHAT'S",
-  "WHEN",
-  "WHEN'S",
-  "WHERE",
-  "WHERE'S",
-  "WHICH",
-  "WHILE",
-  "WHO",
-  "WHO'S",
-  "WHOM",
-  "WHY",
-  "WHY'S",
-  "WITH",
-  "WON'T",
-  "WOULD",
-  "WOULDN'T",
-  "YOU",
-  "YOU'D",
-  "YOU'LL",
-  "YOU'RE",
-  "YOU'VE",
-  "YOUR",
-  "YOURS",
-  "YOURSELF",
-  "YOURSELVES"
+  "MARVEL",
+  "ABLE", "ABOUT", "ABOVE", "ACCORDING", "ACCORDINGLY", "ACROSS", "ACTUALLY", "AFTER", "AFTERWARDS", "AGAIN", "AGAINST", "AIN'T", "ALL", "ALLOW", "ALLOWS", "ALMOST", "ALONE", "ALONG", "ALREADY", "ALSO", "ALTHOUGH", "ALWAYS", "AM", "AMONG", "AMONGST", "AN", "AND", "ANOTHER", "ANY", "ANYBODY", "ANYHOW", "ANYONE", "ANYTHING", "ANYWAY", "ANYWAYS", "ANYWHERE", "APART", "APPEAR", "APPRECIATE", "APPROPRIATE", "ARE", "AREN'T", "AROUND", "AS", "ASIDE", "ASK", "ASKING", "ASSOCIATED", "AT", "AVAILABLE", "AWAY", "AWFULLY", "BE", "BECAME", "BECAUSE", "BECOME", "BECOMES", "BECOMING", "BEEN", "BEFORE", "BEFOREHAND", "BEHIND", "BEING", "BELIEVE", "BELOW", "BESIDE", "BESIDES", "BEST", "BETTER", "BETWEEN", "BEYOND", "BOTH", "BRIEF", "BUT", "BY", "C'MON", "C'S", "CAME", "CAN", "CAN'T", "CANNOT", "CANT", "CAUSE", "CAUSES", "CERTAIN", "CERTAINLY", "CHANGES", "CLEARLY", "CO", "COM", "COME", "COMES", "CONCERNING", "CONSEQUENTLY", "CONSIDER", "CONSIDERING", "CONTAIN", "CONTAINING", "CONTAINS", "CORRESPONDING", "COULD", "COULDN'T", "COURSE", "CURRENTLY", "DEFINITELY", "DESCRIBED", "DESPITE", "DID", "DIDN'T", "DIFFERENT", "DO", "DOES", "DOESN'T", "DOING", "DON'T", "DONE", "DOWN", "DOWNWARDS", "DURING", "EACH", "EDU", "EG", "EIGHT", "EITHER", "ELSE", "ELSEWHERE", "ENOUGH", "ENTIRELY", "ESPECIALLY", "ET", "ETC", "EVEN", "EVER", "EVERY", "EVERYBODY", "EVERYONE", "EVERYTHING", "EVERYWHERE", "EX", "EXACTLY", "EXAMPLE", "EXCEPT", "FAR", "FEW", "FIFTH", "FIRST", "FIVE", "FOLLOWED", "FOLLOWING", "FOLLOWS", "FOR", "FORMER", "FORMERLY", "FORTH", "FOUR", "FROM", "FURTHER", "FURTHERMORE", "GET", "GETS", "GETTING", "GIVEN", "GIVES", "GO", "GOES", "GOING", "GONE", "GOT", "GOTTEN", "GREETINGS", "HAD", "HADN'T", "HAPPENS", "HARDLY", "HAS", "HASN'T", "HAVE", "HAVEN'T", "HAVING", "HE", "HE'S", "HELLO", "HELP", "HENCE", "HER", "HERE", "HERE'S", "HEREAFTER", "HEREBY", "HEREIN", "HEREUPON", "HERS", "HERSELF", "HI", "HIM", "HIMSELF", "HIS", "HITHER", "HOPEFULLY", "HOW", "HOWBEIT", "HOWEVER", "I'D", "I'LL", "I'M", "I'VE", "IE", "IF", "IGNORED", "IMMEDIATE", "IN", "INASMUCH", "INC", "INDEED", "INDICATE", "INDICATED", "INDICATES", "INNER", "INSOFAR", "INSTEAD", "INTO", "INWARD", "IS", "ISN'T", "IT", "IT'D", "IT'LL", "IT'S", "ITS", "ITSELF", "JUST", "KEEP", "KEEPS", "KEPT", "KNOW", "KNOWN", "KNOWS", "LAST", "LATELY", "LATER", "LATTER", "LATTERLY", "LEAST", "LESS", "LEST", "LET", "LET'S", "LIKE", "LIKED", "LIKELY", "LITTLE", "LOOK", "LOOKING", "LOOKS", "LTD", "MAINLY", "MANY", "MAY", "MAYBE", "ME", "MEAN", "MEANWHILE", "MERELY", "MIGHT", "MORE", "MOREOVER", "MOST", "MOSTLY", "MUCH", "MUST", "MY", "MYSELF", "NAME", "NAMELY", "ND", "NEAR", "NEARLY", "NECESSARY", "NEED", "NEEDS", "NEITHER", "NEVER", "NEVERTHELESS", "NEW", "NEXT", "NINE", "NO", "NOBODY", "NON", "NONE", "NOONE", "NOR", "NORMALLY", "NOT", "NOTHING", "NOVEL", "NOW", "NOWHERE", "OBVIOUSLY", "OF", "OFF", "OFTEN", "OH", "OK", "OKAY", "OLD", "ON", "ONCE", "ONE", "ONES", "ONLY", "ONTO", "OR", "OTHER", "OTHERS", "OTHERWISE", "OUGHT", "OUR", "OURS", "OURSELVES", "OUT", "OUTSIDE", "OVER", "OVERALL", "OWN", "PARTICULAR", "PARTICULARLY", "PER", "PERHAPS", "PLACED", "PLEASE", "PLUS", "POSSIBLE", "PRESUMABLY", "PROBABLY", "PROVIDES", "QUE", "QUITE", "QV", "RATHER", "RD", "RE", "REALLY", "REASONABLY", "REGARDING", "REGARDLESS", "REGARDS", "RELATIVELY", "RESPECTIVELY", "RIGHT", "SAID", "SAME", "SAW", "SAY", "SAYING", "SAYS", "SECOND", "SECONDLY", "SEE", "SEEING", "SEEM", "SEEMED", "SEEMING", "SEEMS", "SEEN", "SELF", "SELVES", "SENSIBLE", "SENT", "SERIOUS", "SERIOUSLY", "SEVEN", "SEVERAL", "SHALL", "SHE", "SHOULD", "SHOULDN'T", "SINCE", "SIX", "SO", "SOME", "SOMEBODY", "SOMEHOW", "SOMEONE", "SOMETHING", "SOMETIME", "SOMETIMES", "SOMEWHAT", "SOMEWHERE", "SOON", "SORRY", "SPECIFIED", "SPECIFY", "SPECIFYING", "STILL", "SUB", "SUCH", "SUP", "SURE", "T'S", "TAKE", "TAKEN", "TELL", "TENDS", "TH", "THAN", "THANK", "THANKS", "THANX", "THAT", "THAT'S", "THATS", "THE", "THEIR", "THEIRS", "THEM", "THEMSELVES", "THEN", "THENCE", "THERE", "THERE'S", "THEREAFTER", "THEREBY", "THEREFORE", "THEREIN", "THERES", "THEREUPON", "THESE", "THEY", "THEY'D", "THEY'LL", "THEY'RE", "THEY'VE", "THINK", "THIRD", "THIS", "THOROUGH", "THOROUGHLY", "THOSE", "THOUGH", "THREE", "THROUGH", "THROUGHOUT", "THRU", "THUS", "TO", "TOGETHER", "TOO", "TOOK", "TOWARD", "TOWARDS", "TRIED", "TRIES", "TRULY", "TRY", "TRYING", "TWICE", "TWO", "UN", "UNDER", "UNFORTUNATELY", "UNLESS", "UNLIKELY", "UNTIL", "UNTO", "UP", "UPON", "US", "USE", "USED", "USEFUL", "USES", "USING", "USUALLY", "VALUE", "VARIOUS", "VERY", "VIA", "VIZ", "VS", "WANT", "WANTS", "WAS", "WASN'T", "WAY", "WE", "WE'D", "WE'LL", "WE'RE", "WE'VE", "WELCOME", "WELL", "WENT", "WERE", "WEREN'T", "WHAT", "WHAT'S", "WHATEVER", "WHEN", "WHENCE", "WHENEVER", "WHERE", "WHERE'S", "WHEREAFTER", "WHEREAS", "WHEREBY", "WHEREIN", "WHEREUPON", "WHEREVER", "WHETHER", "WHICH", "WHILE", "WHITHER", "WHO", "WHO'S", "WHOEVER", "WHOLE", "WHOM", "WHOSE", "WHY", "WILL", "WILLING", "WISH", "WITH", "WITHIN", "WITHOUT", "WON'T", "WONDER", "WOULD", "WOULDN'T", "YES", "YET", "YOU", "YOU'D", "YOU'LL", "YOU'RE", "YOU'VE", "YOUR", "YOURS", "YOURSELF", "YOURSELVES", "ZERO"
 ];
 
-List create_wordlist(String text) {
-  List words = text.toUpperCase().split(new RegExp(r"[^\w']+"));
-  List wordList = [];
-  Map wordCount = {};
+Map<String, int> create_wordmap(String text) {
+  List<String> words = text.toUpperCase().split(new RegExp(r"[^ABCDEFGHIJKLMNOPQRSTUVWXYZ\-]+"));
+  Map<String, int> wordcount = {};
 
-  for (var word in words) {
-    if (wordCount.containsKey(word)) {
-      wordCount[word]++;
-    } else {
-      wordCount[word] = 1;
+  for (String word in words) {
+    if (word != "" && word.length > 2 && !stop_words.contains(word)) {
+      if (wordcount.containsKey(word)) {
+        wordcount[word]++;
+      } else {
+        wordcount[word] = 1;
+      }
     }
   }
 
-  for (var word in wordCount.keys) {
-    //if (word != null && word != "" && word.length > 2 && !stop_words.contains(word)) {
-    if (word != null && word != "" && word.length > 3) {
-      wordList.add({"word": word, "count": wordCount[word]});
-    }
-  }
-
-  wordList.sort((a, b) => b["count"].compareTo(a["count"]));
-
-  return wordList;
+  return wordcount;
 }
